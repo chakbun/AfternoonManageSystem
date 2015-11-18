@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
@@ -84,7 +85,7 @@
             </objects>
             <point key="canvasLocation" x="602" y="1267"/>
         </scene>
-        <!--Aft Article List Controller-->
+        <!--文章-->
         <scene sceneID="ctU-do-Mxl">
             <objects>
                 <tableViewController id="F8x-pF-FMC" customClass="AftArticleListController" customModule="AfterManager" customModuleProvider="target" sceneMemberID="viewController">
@@ -103,6 +104,9 @@
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <segue destination="Ehx-VC-BnD" kind="show" identifier="addArticleSegueID" id="EsN-2k-PdQ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -110,15 +114,72 @@
                             <outlet property="delegate" destination="F8x-pF-FMC" id="PpG-i3-SEZ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="文章" id="zBJ-Gy-ZDt"/>
+                    <connections>
+                        <segue destination="wEY-fR-bys" kind="show" identifier="articleDetailSegueID" id="fc8-cF-nD6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyL-BF-8tR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-548" y="1267"/>
         </scene>
+        <!--Aft Add Article Controller-->
+        <scene sceneID="o19-vv-TAr">
+            <objects>
+                <viewController id="Ehx-VC-BnD" customClass="AftAddArticleController" customModule="AfterManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0dZ-ID-wKs"/>
+                        <viewControllerLayoutGuide type="bottom" id="qwR-kF-grs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3SP-D6-CLO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LC3-IC-uW2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1044" y="2050"/>
+        </scene>
+        <!--Aft Article Detail Controller-->
+        <scene sceneID="teb-Jh-hvd">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="wEY-fR-bys" customClass="AftArticleDetailController" customModule="AfterManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3q3-Xq-SV8"/>
+                        <viewControllerLayoutGuide type="bottom" id="X40-8T-ZLm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PD3-mt-mL8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCC-E9-gdr">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="X40-8T-ZLm" firstAttribute="top" secondItem="dCC-E9-gdr" secondAttribute="bottom" id="0GV-DJ-efc"/>
+                            <constraint firstItem="dCC-E9-gdr" firstAttribute="leading" secondItem="PD3-mt-mL8" secondAttribute="leadingMargin" constant="-20" id="J3l-3r-cye"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dCC-E9-gdr" secondAttribute="trailing" constant="-20" id="XiH-g1-fcV"/>
+                            <constraint firstItem="dCC-E9-gdr" firstAttribute="top" secondItem="3q3-Xq-SV8" secondAttribute="bottom" id="eNR-kg-Pxu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentWebView" destination="dCC-E9-gdr" id="YuM-lB-PuJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="028-xa-fem" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-83" y="2050"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="8M8-4U-AG6">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vjk-km-3KO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="uys-u7-Ntm" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8js-J8-Zd8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -129,6 +190,7 @@
                         <segue destination="mwQ-bZ-Zol" kind="relationship" relationship="rootViewController" id="Cj5-nv-JbP"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vjk-km-3KO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-694" y="492"/>
         </scene>

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		35AF1BFD868DBCA6044607C8 /* libPods-AfterManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F1AEBECFB45D5A7D043AF5 /* libPods-AfterManager.a */; };
+		DF38F0FA1BFC54090067BFF0 /* AftBmobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF38F0F91BFC54090067BFF0 /* AftBmobManager.swift */; };
 		DFE189C41BFAC2BB00C14339 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE189C21BFAC2BB00C14339 /* Main.storyboard */; };
 		DFE189C61BFAC2BB00C14339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFE189C51BFAC2BB00C14339 /* Assets.xcassets */; };
 		DFE189C91BFAC2BB00C14339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE189C71BFAC2BB00C14339 /* LaunchScreen.storyboard */; };
@@ -18,10 +19,13 @@
 		DFE189E41BFB027000C14339 /* AftArticleListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE189E31BFB027000C14339 /* AftArticleListController.swift */; };
 		DFE189E61BFB028600C14339 /* AftImageListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE189E51BFB028600C14339 /* AftImageListController.swift */; };
 		DFE189E81BFB1C3300C14339 /* AftArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE189E71BFB1C3300C14339 /* AftArticle.swift */; };
+		DFE189EA1BFB34F800C14339 /* AftAddArticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE189E91BFB34F800C14339 /* AftAddArticleController.swift */; };
+		DFE189EC1BFB350A00C14339 /* AftArticleDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE189EB1BFB350A00C14339 /* AftArticleDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2E745284567D627C9DA15A85 /* Pods-AfterManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AfterManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AfterManager/Pods-AfterManager.debug.xcconfig"; sourceTree = "<group>"; };
+		DF38F0F91BFC54090067BFF0 /* AftBmobManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AftBmobManager.swift; sourceTree = "<group>"; };
 		DFE189BB1BFAC2BB00C14339 /* AfterManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AfterManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFE189C31BFAC2BB00C14339 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DFE189C51BFAC2BB00C14339 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,6 +38,8 @@
 		DFE189E31BFB027000C14339 /* AftArticleListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AftArticleListController.swift; sourceTree = "<group>"; };
 		DFE189E51BFB028600C14339 /* AftImageListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AftImageListController.swift; sourceTree = "<group>"; };
 		DFE189E71BFB1C3300C14339 /* AftArticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AftArticle.swift; sourceTree = "<group>"; };
+		DFE189E91BFB34F800C14339 /* AftAddArticleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AftAddArticleController.swift; sourceTree = "<group>"; };
+		DFE189EB1BFB350A00C14339 /* AftArticleDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AftArticleDetailController.swift; sourceTree = "<group>"; };
 		E6F1AEBECFB45D5A7D043AF5 /* libPods-AfterManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AfterManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A91BC30A10A15A63263526 /* Pods-AfterManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AfterManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-AfterManager/Pods-AfterManager.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +139,8 @@
 				DFE189E11BFAF5A500C14339 /* AftMenuController.swift */,
 				DFE189E31BFB027000C14339 /* AftArticleListController.swift */,
 				DFE189E51BFB028600C14339 /* AftImageListController.swift */,
+				DFE189E91BFB34F800C14339 /* AftAddArticleController.swift */,
+				DFE189EB1BFB350A00C14339 /* AftArticleDetailController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -148,6 +156,7 @@
 		DFE189DA1BFAF38200C14339 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DF38F0F91BFC54090067BFF0 /* AftBmobManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -194,6 +203,7 @@
 				TargetAttributes = {
 					DFE189BA1BFAC2BB00C14339 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = SU8WEJ4S57;
 					};
 				};
 			};
@@ -284,7 +294,10 @@
 			files = (
 				DFE189E61BFB028600C14339 /* AftImageListController.swift in Sources */,
 				DFE189E41BFB027000C14339 /* AftArticleListController.swift in Sources */,
+				DF38F0FA1BFC54090067BFF0 /* AftBmobManager.swift in Sources */,
+				DFE189EC1BFB350A00C14339 /* AftArticleDetailController.swift in Sources */,
 				DFE189DC1BFAF38200C14339 /* ViewController.swift in Sources */,
+				DFE189EA1BFB34F800C14339 /* AftAddArticleController.swift in Sources */,
 				DFE189E21BFAF5A500C14339 /* AftMenuController.swift in Sources */,
 				DFE189E81BFB1C3300C14339 /* AftArticle.swift in Sources */,
 				DFE189D41BFAF37700C14339 /* AppDelegate.swift in Sources */,
@@ -404,6 +417,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/AfterManager/Supported/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -420,6 +435,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/AfterManager/Supported/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

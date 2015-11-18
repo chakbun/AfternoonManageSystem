@@ -12,9 +12,16 @@ import UIKit
 class AftArticleListController: UITableViewController {
     
     var articleList: NSMutableArray?
+    var selectedArticle: AftArticle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "文章"
+        
+        let addArticleItem: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action:"addArticleAction:")
+        self.navigationItem.rightBarButtonItem = addArticleItem
+        
         articleList = NSMutableArray.init(array: [])
         
         let bmobQuery: BmobQuery = BmobQuery(className: "table_article")
@@ -57,6 +64,19 @@ class AftArticleListController: UITableViewController {
         print("--------------deinit")
     }
     
+    func addArticleAction(sender: AnyObject) -> Void {
+        self.performSegueWithIdentifier("addArticleSegueID", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "articleDetailSegueID" {
+            let destinationController = segue.destinationViewController as! AftArticleDetailController
+            destinationController.title = self.selectedArticle?.title
+            destinationController.article = self.selectedArticle
+        }
+    }
+    
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleList!.count
     }
@@ -74,6 +94,7 @@ class AftArticleListController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        self.selectedArticle = self.articleList?[indexPath.row] as? AftArticle
+        self.performSegueWithIdentifier("articleDetailSegueID", sender: self)
     }
 }
