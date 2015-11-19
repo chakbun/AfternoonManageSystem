@@ -126,7 +126,7 @@
         <!--Aft Add Article Controller-->
         <scene sceneID="o19-vv-TAr">
             <objects>
-                <viewController id="Ehx-VC-BnD" customClass="AftAddArticleController" customModule="AfterManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Ehx-VC-BnD" customClass="AftAddArticleController" customModule="AfterManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0dZ-ID-wKs"/>
                         <viewControllerLayoutGuide type="bottom" id="qwR-kF-grs"/>

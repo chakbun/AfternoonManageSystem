@@ -8,12 +8,20 @@
 
 import UIKit
 
-class AftAddArticleController: UIViewController {
+class AftAddArticleController: ZSSRichTextEditor {
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
         self.title = "添加文章"
+        self.edgesForExtendedLayout = UIRectEdge.Bottom
+        
+        let htmlHead: String = "<!-- This is an HTML comment -->"
+        "<p>This is a test of the <strong>ZSSRichTextEditor</strong> by <a title=\"Zed Said\" href=\"http://www.zedsaid.com\">Zed Said Studio</a></p>"
+        self.formatHTML = true
+        self.baseURL = NSURL.init(string: "http://www.zedsaid.com")
+        self.shouldShowKeyboard = false
+        self.setHTML(htmlHead)
         
     }
     

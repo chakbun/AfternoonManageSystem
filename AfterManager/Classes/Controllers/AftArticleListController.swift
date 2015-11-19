@@ -14,6 +14,8 @@ class AftArticleListController: UITableViewController {
     var articleList: NSMutableArray?
     var selectedArticle: AftArticle?
     
+    //MARK: Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,35 +26,11 @@ class AftArticleListController: UITableViewController {
         
         articleList = NSMutableArray.init(array: [])
         
-        let bmobQuery: BmobQuery = BmobQuery(className: "table_article")
-        
-        let loadArticleList: (results: NSArray)->() = {
-            [weak self](results) -> () in
+        AftBmobManager.sharedInstance.loadArticleLists { [weak self] (articles) -> Void in
             if let strongSelf = self {
-                strongSelf.articleList?.addObjectsFromArray(results as! [AftArticle])
+                strongSelf.articleList?.addObjectsFromArray(articles as! [AftArticle])
                 strongSelf.tableView.reloadData()
             }
-        }
-        
-        bmobQuery.findObjectsInBackgroundWithBlock { (results, error) -> Void in
-            
-            let tempArticleLists: NSMutableArray = NSMutableArray.init(array: [])
-            for bmobObject in results {
-                
-                if bmobObject is BmobObject {
-                    let tempArticle: AftArticle = AftArticle.init()
-                    tempArticle.articleID = bmobObject.objectId
-                    tempArticle.createAt = bmobObject.createdAt
-                    tempArticle.updateAt = bmobObject.updatedAt
-                    tempArticle.title = bmobObject.objectForKey("title") as! String
-                    tempArticle.content = bmobObject.objectForKey("content") as! String
-                    tempArticle.author = bmobObject.objectForKey("author") as? String
-                    tempArticle.authorIntro = bmobObject.objectForKey("authorIntro") as? String
-                    tempArticle.refer = bmobObject.objectForKey("refer") as? String
-                    tempArticleLists.addObject(tempArticle)
-                }
-            }
-            loadArticleList(results: tempArticleLists)
         }
     }
     
@@ -63,6 +41,8 @@ class AftArticleListController: UITableViewController {
     deinit {
         print("--------------deinit")
     }
+    
+    //MARK: Public
     
     func addArticleAction(sender: AnyObject) -> Void {
         self.performSegueWithIdentifier("addArticleSegueID", sender: self)
@@ -76,6 +56,26 @@ class AftArticleListController: UITableViewController {
         }
     }
     
+    //MARK: TableView Delegate
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let deletedArticle: AftArticle = self.articleList?[indexPath.row] as! AftArticle
+            
+            AftBmobManager.sharedInstance.deleteArticles([deletedArticle.articleID], completed: { (error, success) -> Void in
+                if success {
+                    self.articleList?.removeObjectAtIndex(indexPath.row)
+                    self.tableView.reloadData()
+                }
+            })
+
+        }
+    }
+    
+    //MARK: TableView DataSource
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleList!.count

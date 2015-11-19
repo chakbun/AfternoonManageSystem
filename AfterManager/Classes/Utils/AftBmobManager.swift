@@ -9,6 +9,7 @@
 import Foundation
 
 class AftBmobManager: NSObject {
+    
     class var sharedInstance: AftBmobManager {
         struct Static {
             static let instance: AftBmobManager = AftBmobManager()
@@ -16,7 +17,9 @@ class AftBmobManager: NSObject {
         return Static.instance
     }
     
-    func loadArticleLists() -> () {
+    //MARK: Public 
+    
+    func loadArticleLists(parseResultMethod: (NSArray) -> Void ) -> Void {
         let bmobQuery: BmobQuery = BmobQuery(className: "table_article")
         
         bmobQuery.findObjectsInBackgroundWithBlock { (results, error) -> Void in
@@ -38,6 +41,30 @@ class AftBmobManager: NSObject {
                     tempArticleLists.addObject(tempArticle)
                 }
             }
+            parseResultMethod(tempArticleLists)
+        }
+    }
+    
+    func deleteArticles(articleIDs: NSArray, completed:(NSError?,Bool) -> Void) -> Void {
+        let bmobQuery: BmobQuery = BmobQuery(className: "table_article")
+        for articleID in articleIDs {
+            bmobQuery.getObjectInBackgroundWithId(articleID as! String, block: { (responseObject, queryError) -> Void in
+                if let requestQueryError = queryError {
+                    print("找不到要删除的数据：\(requestQueryError)")
+                    completed(queryError,false)
+                }else {
+                    if let deletedObject: BmobObject = responseObject {
+                        deletedObject.deleteInBackgroundWithBlock({ (success, deletedError) -> Void in
+                            if let requestDeletedError = deletedError {
+                                print("删除的数据异常：\(requestDeletedError)")
+                                completed(deletedError,false)
+                            }else {
+                                completed(nil,true)
+                            }
+                        })
+                    }
+                }
+            })
         }
     }
     
