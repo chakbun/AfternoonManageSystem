@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Bmob.registerWithAppKey("aba90becf7c1a8f0df9f8bfbc00ad883")
+        window?.backgroundColor = UIColor.whiteColor()
         return true
     }
 

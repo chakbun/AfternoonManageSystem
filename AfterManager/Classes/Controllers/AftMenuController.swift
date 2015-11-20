@@ -15,13 +15,12 @@ class AftMenuContrller: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "午后Afternoon后台菜单";
+        self.title = "午后Afternoon后台";
         itemsTitle = ["文章","图片"]
     }
     
     override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
+        super.didReceiveMemoryWarning()   
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

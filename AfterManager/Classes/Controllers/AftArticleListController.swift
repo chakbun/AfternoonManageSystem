@@ -46,6 +46,8 @@ class AftArticleListController: UITableViewController {
     
     func addArticleAction(sender: AnyObject) -> Void {
         self.performSegueWithIdentifier("addArticleSegueID", sender: self)
+//        var demoViewController: ZSSDemoViewController = ZSSDemoViewController.init()
+//        self.navigationController?.pushViewController(demoViewController, animated: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
