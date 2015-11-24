@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		35AF1BFD868DBCA6044607C8 /* libPods-AfterManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F1AEBECFB45D5A7D043AF5 /* libPods-AfterManager.a */; };
 		DF0DF7D71BFEC917001330D2 /* ZSSDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0DF7D51BFEC917001330D2 /* ZSSDemoViewController.m */; };
+		DF2CF5FC1C0448AE0008C122 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DF2CF5FE1C0448AE0008C122 /* Localizable.strings */; };
 		DF38F0FA1BFC54090067BFF0 /* AftBmobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF38F0F91BFC54090067BFF0 /* AftBmobManager.swift */; };
 		DFE189C41BFAC2BB00C14339 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE189C21BFAC2BB00C14339 /* Main.storyboard */; };
 		DFE189C61BFAC2BB00C14339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFE189C51BFAC2BB00C14339 /* Assets.xcassets */; };
 		DFE189C91BFAC2BB00C14339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE189C71BFAC2BB00C14339 /* LaunchScreen.storyboard */; };
 		DFE189D41BFAF37700C14339 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE189D11BFAF37700C14339 /* AppDelegate.swift */; };
-		DFE189D51BFAF37700C14339 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFE189D31BFAF37700C14339 /* Info.plist */; };
 		DFE189DC1BFAF38200C14339 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE189D81BFAF38200C14339 /* ViewController.swift */; };
 		DFE189E21BFAF5A500C14339 /* AftMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE189E11BFAF5A500C14339 /* AftMenuController.swift */; };
 		DFE189E41BFB027000C14339 /* AftArticleListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE189E31BFB027000C14339 /* AftArticleListController.swift */; };
@@ -28,6 +28,11 @@
 		2E745284567D627C9DA15A85 /* Pods-AfterManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AfterManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AfterManager/Pods-AfterManager.debug.xcconfig"; sourceTree = "<group>"; };
 		DF0DF7D51BFEC917001330D2 /* ZSSDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSSDemoViewController.m; sourceTree = "<group>"; };
 		DF0DF7D61BFEC917001330D2 /* ZSSDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSSDemoViewController.h; sourceTree = "<group>"; };
+		DF2CF5F81C0443640008C122 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		DF2CF5F91C0443640008C122 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		DF2CF5FD1C0448AE0008C122 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DF2CF5FF1C0448B10008C122 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		DF2CF6001C0448B30008C122 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DF38F0F91BFC54090067BFF0 /* AftBmobManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AftBmobManager.swift; sourceTree = "<group>"; };
 		DFE189BB1BFAC2BB00C14339 /* AfterManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AfterManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFE189C31BFAC2BB00C14339 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -120,6 +125,7 @@
 				DFE189C21BFAC2BB00C14339 /* Main.storyboard */,
 				DFE189C71BFAC2BB00C14339 /* LaunchScreen.storyboard */,
 				DFE189D31BFAF37700C14339 /* Info.plist */,
+				DF2CF5FE1C0448AE0008C122 /* Localizable.strings */,
 			);
 			path = Supported;
 			sourceTree = "<group>";
@@ -219,6 +225,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = DFE189B21BFAC2BB00C14339;
 			productRefGroup = DFE189BC1BFAC2BB00C14339 /* Products */;
@@ -235,8 +242,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFE189D51BFAF37700C14339 /* Info.plist in Resources */,
 				DFE189C91BFAC2BB00C14339 /* LaunchScreen.storyboard in Resources */,
+				DF2CF5FC1C0448AE0008C122 /* Localizable.strings in Resources */,
 				DFE189C61BFAC2BB00C14339 /* Assets.xcassets in Resources */,
 				DFE189C41BFAC2BB00C14339 /* Main.storyboard in Resources */,
 			);
@@ -313,10 +320,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		DF2CF5FE1C0448AE0008C122 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DF2CF5FD1C0448AE0008C122 /* en */,
+				DF2CF5FF1C0448B10008C122 /* zh-Hans */,
+				DF2CF6001C0448B30008C122 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		DFE189C21BFAC2BB00C14339 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DFE189C31BFAC2BB00C14339 /* Base */,
+				DF2CF5F81C0443640008C122 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			path = ..;
@@ -326,6 +344,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DFE189C81BFAC2BB00C14339 /* Base */,
+				DF2CF5F91C0443640008C122 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			path = ..;

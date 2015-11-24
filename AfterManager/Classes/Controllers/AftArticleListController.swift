@@ -14,13 +14,18 @@ class AftArticleListController: UITableViewController {
     var articleList: NSMutableArray?
     var selectedArticle: AftArticle?
     
+    func aftLocalizedString(key: String)->(String) {
+        let value: String = NSLocalizedString(key, comment: "没有对应的键值")
+        return value
+    }
+    
     //MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "文章"
-        
+        self.title = aftLocalizedString("TITLE_ARTICLE_MENU_VC")
+
         let addArticleItem: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action:"addArticleAction:")
         self.navigationItem.rightBarButtonItem = addArticleItem
         

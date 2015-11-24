@@ -16,7 +16,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Pq0-Hs-4P0">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="no111" id="Pq0-Hs-4P0">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pq0-Hs-4P0" id="teQ-i1-w1E">
@@ -29,7 +29,7 @@
                                     <segue destination="F8x-pF-FMC" kind="show" identifier="articleVcSegueID" id="mgh-wI-YDt"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qrU-sq-F2Q">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noReedd" id="qrU-sq-F2Q">
                                 <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qrU-sq-F2Q" id="hAx-eZ-zcS">
@@ -52,7 +52,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3mU-ux-Ley" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="26" y="492"/>
+            <point key="canvasLocation" x="285" y="364"/>
         </scene>
         <!--Aft Image List Controller-->
         <scene sceneID="vkr-Ih-vfA">
@@ -95,7 +95,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="E9j-dW-tlt">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noRes" id="E9j-dW-tlt">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E9j-dW-tlt" id="EIF-64-12h">
@@ -121,12 +121,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyL-BF-8tR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-548" y="1267"/>
+            <point key="canvasLocation" x="-432" y="1262"/>
         </scene>
         <!--Aft Add Article Controller-->
         <scene sceneID="o19-vv-TAr">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Ehx-VC-BnD" customClass="AftAddArticleController" customModule="AfterManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Ehx-VC-BnD" customClass="AftAddArticleController" customModule="AfterManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0dZ-ID-wKs"/>
                         <viewControllerLayoutGuide type="bottom" id="qwR-kF-grs"/>

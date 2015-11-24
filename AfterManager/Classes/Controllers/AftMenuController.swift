@@ -13,10 +13,15 @@ class AftMenuContrller: UITableViewController {
     
     var itemsTitle: NSArray?
     
+    func aftLocalizedString(key: String)->(String) {
+        let value: String = NSLocalizedString(key, comment: "没有对应的键值")
+        return value
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "午后Afternoon后台";
-        itemsTitle = ["文章","图片"]
+        self.title = aftLocalizedString("TITLE_MENU_VC")
+        itemsTitle = [aftLocalizedString("TITLE_ARTICLE_MENU_VC"),aftLocalizedString("TITLE_ALBUM_MENU_VC")]
     }
     
     override func didReceiveMemoryWarning() {

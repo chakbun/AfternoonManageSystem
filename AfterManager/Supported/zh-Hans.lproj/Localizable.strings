@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  AfterManager
+
+  Created by Jaben on 15/11/24.
+  Copyright © 2015年 After. All rights reserved.
+*/
+
+"TITLE_MENU_VC" = "午后Afternoon后台";
+"TITLE_ARTICLE_MENU_VC" = "文章";
+"TITLE_ALBUM_MENU_VC" = "图片";
+"TITLE_ADD_ARTICLE_VC" = "添加文章";
