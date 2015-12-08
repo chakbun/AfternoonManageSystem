@@ -11,7 +11,7 @@ import UIKit
 
 class AftArticleListController: UITableViewController {
     
-    var articleList: NSMutableArray?
+    var articleList:  [AftArticle]?
     var selectedArticle: AftArticle?
     
     func aftLocalizedString(key: String)->(String) {
@@ -29,12 +29,22 @@ class AftArticleListController: UITableViewController {
         let addArticleItem: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action:"addArticleAction:")
         self.navigationItem.rightBarButtonItem = addArticleItem
         
-        articleList = NSMutableArray.init(array: [])
+        articleList = [AftArticle]();
         
-        AftBmobManager.sharedInstance.loadArticleLists { [weak self] (articles) -> Void in
+        AftDBManager.shareInstance.loadArticles { [weak self] (localArticles) -> Void in
             if let strongSelf = self {
-                strongSelf.articleList?.addObjectsFromArray(articles as! [AftArticle])
-                strongSelf.tableView.reloadData()
+                if localArticles.count > 0 {
+                    strongSelf.articleList = localArticles
+                    strongSelf.tableView.reloadData()
+                }else {
+                    AftBmobManager.sharedInstance.loadArticleLists { [weak self] (articles) -> Void in
+                        if let strongSelf = self {
+                            strongSelf.articleList = strongSelf.articleList! + articles
+                            AftDBManager.shareInstance.addArticles(strongSelf.articleList!)
+                            strongSelf.tableView.reloadData()
+                        }
+                    }
+                }
             }
         }
     }
@@ -70,11 +80,11 @@ class AftArticleListController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            let deletedArticle: AftArticle = self.articleList?[indexPath.row] as! AftArticle
+            let deletedArticle: AftArticle = (self.articleList?[indexPath.row])!
             
             AftBmobManager.sharedInstance.deleteArticles([deletedArticle.articleID], completed: { (error, success) -> Void in
                 if success {
-                    self.articleList?.removeObjectAtIndex(indexPath.row)
+                    self.articleList?.removeAtIndex(indexPath.row)
                     self.tableView.reloadData()
                 }
             })
@@ -95,13 +105,13 @@ class AftArticleListController: UITableViewController {
         if itemCell == nil {
             itemCell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: itemsReUserID)
         }
-        let article: AftArticle = self.articleList?[indexPath.row] as! AftArticle
+        let article: AftArticle = (self.articleList?[indexPath.row])!
         itemCell.textLabel?.text = article.title
         return itemCell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.selectedArticle = self.articleList?[indexPath.row] as? AftArticle
+        self.selectedArticle = (self.articleList?[indexPath.row])!
         self.performSegueWithIdentifier("articleDetailSegueID", sender: self)
     }
 }

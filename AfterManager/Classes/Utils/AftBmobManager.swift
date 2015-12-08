@@ -19,12 +19,12 @@ class AftBmobManager: NSObject {
     
     //MARK: Public 
     
-    func loadArticleLists(parseResultMethod: (NSArray) -> Void ) -> Void {
+    func loadArticleLists(parseResultMethod: ([AftArticle]) -> Void ) -> Void {
         let bmobQuery: BmobQuery = BmobQuery(className: "table_article")
         
         bmobQuery.findObjectsInBackgroundWithBlock { (results, error) -> Void in
             
-            let tempArticleLists: NSMutableArray = NSMutableArray.init(array: [])
+            var tempArticleLists: [AftArticle] = [AftArticle]()
             
             for bmobObject in results {
                 
@@ -38,7 +38,7 @@ class AftBmobManager: NSObject {
                     tempArticle.author = bmobObject.objectForKey("author") as? String
                     tempArticle.authorIntro = bmobObject.objectForKey("authorIntro") as? String
                     tempArticle.refer = bmobObject.objectForKey("refer") as? String
-                    tempArticleLists.addObject(tempArticle)
+                    tempArticleLists.append(tempArticle)
                 }
             }
             parseResultMethod(tempArticleLists)
