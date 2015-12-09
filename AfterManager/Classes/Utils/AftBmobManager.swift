@@ -45,7 +45,7 @@ class AftBmobManager: NSObject {
         }
     }
     
-    func deleteArticles(articleIDs: NSArray, completed:(NSError?,Bool) -> Void) -> Void {
+    func deleteArticles(articleIDs: NSArray, completed: (NSError?,Bool) -> Void) -> Void {
         let bmobQuery: BmobQuery = BmobQuery(className: "table_article")
         for articleID in articleIDs {
             bmobQuery.getObjectInBackgroundWithId(articleID as! String, block: { (responseObject, queryError) -> Void in
@@ -65,6 +65,21 @@ class AftBmobManager: NSObject {
                     }
                 }
             })
+        }
+    }
+    
+    func postArticleWithInfo(info: NSDictionary, completed: (NSError?, Bool) -> Void) -> Void {
+        
+        let articleModel: BmobObject = BmobObject.init(className: "table_article")
+        
+        articleModel.setObject(info["title"], forKey: "title")
+        articleModel.setObject(info["content"], forKey: "content")
+        articleModel.setObject(info["author"], forKey: "author")
+        articleModel.setObject(info["authorIntro"], forKey: "authorIntro")
+        articleModel.setObject(info["refer"], forKey: "refer")
+        
+        articleModel.saveInBackgroundWithResultBlock { (isSuccess, saveError) -> Void in
+            completed(saveError,isSuccess)
         }
     }
     

@@ -69,7 +69,12 @@ class AftDBManager: NSObject {
                         let sqlParams: String = "('\(article.articleID)','\(article.title)','\(article.content)','\(article.author)','\(article.refer)','\(article.authorIntro)','\(createDateString)','\(updateDateString)');"
                         
                         
-                        dataBase.executeUpdate(sqlHead + sqlParams, withArgumentsInArray: nil)
+                        let addArticlesResult:Bool = dataBase.executeUpdate(sqlHead + sqlParams, withArgumentsInArray: nil)
+                        print("addArticlesResult: \(addArticlesResult)")
+                        if addArticlesResult == false {
+                            print("last error: \(dataBase?.lastErrorMessage())")
+                        }
+
                         
                     }
                 })
@@ -97,15 +102,14 @@ class AftDBManager: NSObject {
                         tempModel.refer = articleSet.objectForColumnName("refer") as! String
                         tempModel.authorIntro = articleSet.objectForColumnName("authorIntro") as! String
                         
-                        NSLog("－－》 %@", articleSet.objectForColumnName("createAt") as! String)
                         if let createAtMsg: String = articleSet.objectForColumnName("createAt") as? String  {
-                            let createDate: NSDate = (strongSelf.dateFormatter?.dateFromString(createAtMsg))!
+                            let createDate: NSDate? = strongSelf.dateFormatter?.dateFromString(createAtMsg)
                             tempModel.createAt = createDate
                         }
                         
                         if let updateAtMsg: String = articleSet.objectForColumnName("updateAt") as? String {
                             
-                            let updateDate: NSDate = (strongSelf.dateFormatter?.dateFromString(updateAtMsg))!
+                            let updateDate: NSDate? = strongSelf.dateFormatter?.dateFromString(updateAtMsg)
                             tempModel.updateAt = updateDate
                         }
                         

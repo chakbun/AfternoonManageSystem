@@ -23,11 +23,29 @@ class AftAddArticleController: ZSSRichTextEditor {
 
         let htmlHead: String = "<!-- This is an HTML comment --><p>This is a test of the <strong>ZSSRichTextEditor</strong> by <a title=\"Zed Said\" href=\"http://www.zedsaid.com\">Zed Said Studio</a></p>"
         self.setHTML(htmlHead)
+        
+        let postArticleItem: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action:"postArticleAction:")
+        self.navigationItem.rightBarButtonItem = postArticleItem
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    }
+    
+    
+    //MARK: Button Action
+    func postArticleAction(sender: AnyObject) -> Void {
+        let title = "测试"
+        let content = self.getHTML();
+        let author = "是你吗"
+        let authorInfo = "一个写嘢嘅人"
+        let refer = "none link"
+        
+        AftBmobManager.sharedInstance.postArticleWithInfo(["title":title, "content":content, "author":author, "authorInfo":authorInfo, "refer":refer]) { (error, isSuccess) -> Void in
+            
+        }
     }
     
     

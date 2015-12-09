@@ -53,10 +53,6 @@ class AftArticleListController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    deinit {
-        print("--------------deinit")
-    }
-    
     //MARK: Public
     
     func addArticleAction(sender: AnyObject) -> Void {
