@@ -14,7 +14,7 @@ class AftArticleListController: UITableViewController {
     var articleList:  [AftArticle]?
     var selectedArticle: AftArticle?
     
-    func aftLocalizedString(key: String)->(String) {
+    func aftLocalizedString(_ key: String)->(String) {
         let value: String = NSLocalizedString(key, comment: "没有对应的键值")
         return value
     }
@@ -26,7 +26,7 @@ class AftArticleListController: UITableViewController {
         
         self.title = aftLocalizedString("TITLE_ARTICLE_MENU_VC")
 
-        let addArticleItem: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action:"addArticleAction:")
+        let addArticleItem: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action:#selector(AftArticleListController.addArticleAction(_:)))
         self.navigationItem.rightBarButtonItem = addArticleItem
         
         articleList = [AftArticle]();
@@ -55,32 +55,32 @@ class AftArticleListController: UITableViewController {
     
     //MARK: Public
     
-    func addArticleAction(sender: AnyObject) -> Void {
-        self.performSegueWithIdentifier("addArticleSegueID", sender: self)
+    func addArticleAction(_ sender: AnyObject) -> Void {
+        self.performSegue(withIdentifier: "addArticleSegueID", sender: self)
 //        var demoViewController: ZSSDemoViewController = ZSSDemoViewController.init()
 //        self.navigationController?.pushViewController(demoViewController, animated: true)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "articleDetailSegueID" {
-            let destinationController = segue.destinationViewController as! AftArticleDetailController
+            let destinationController = segue.destination as! AftArticleDetailController
             destinationController.title = self.selectedArticle?.title
             destinationController.article = self.selectedArticle
         }
     }
     
     //MARK: TableView Delegate
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            let deletedArticle: AftArticle = (self.articleList?[indexPath.row])!
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            let deletedArticle: AftArticle = (self.articleList?[(indexPath as NSIndexPath).row])!
             
-            AftBmobManager.sharedInstance.deleteArticles([deletedArticle.articleID], completed: { (error, success) -> Void in
+            AftBmobManager.sharedInstance.deleteArticles(articleIDs: [deletedArticle.articleID], completed: { (error, success) -> Void in
                 if success {
-                    self.articleList?.removeAtIndex(indexPath.row)
+                    self.articleList?.remove(at: (indexPath as NSIndexPath).row)
                     self.tableView.reloadData()
                 }
             })
@@ -90,24 +90,24 @@ class AftArticleListController: UITableViewController {
     
     //MARK: TableView DataSource
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleList!.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let itemsReUserID: String = "articleListReUserID"
-        var itemCell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(itemsReUserID)
+        var itemCell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: itemsReUserID)
         if itemCell == nil {
-            itemCell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: itemsReUserID)
+            itemCell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: itemsReUserID)
         }
-        let article: AftArticle = (self.articleList?[indexPath.row])!
+        let article: AftArticle = (self.articleList?[(indexPath as NSIndexPath).row])!
         itemCell.textLabel?.text = article.title
         return itemCell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.selectedArticle = (self.articleList?[indexPath.row])!
-        self.performSegueWithIdentifier("articleDetailSegueID", sender: self)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedArticle = (self.articleList?[(indexPath as NSIndexPath).row])!
+        self.performSegue(withIdentifier: "articleDetailSegueID", sender: self)
     }
 }

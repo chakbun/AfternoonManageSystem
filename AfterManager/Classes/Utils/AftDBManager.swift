@@ -17,22 +17,21 @@ class AftDBManager: NSObject {
     
     static let shareInstance = AftDBManager()
     
-    private var dbQueue: dispatch_queue_t = dispatch_queue_create(QUEUE_LABEL, DISPATCH_QUEUE_CONCURRENT)
-    private var fmDatabaseQueue: FMDatabaseQueue?
-    private var fmDataBase: FMDatabase?
-    private var dateFormatter: NSDateFormatter?
+    fileprivate var dbQueue: DispatchQueue = DispatchQueue(label: QUEUE_LABEL, attributes: DispatchQueue.Attributes.concurrent)
+    fileprivate var fmDatabaseQueue: FMDatabaseQueue?
+    fileprivate var fmDataBase: FMDatabase?
+    fileprivate var dateFormatter: DateFormatter?
 
     override init() {
         
         super.init()
         
-        let documentPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
+        let documentPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         let databasePath = documentPath + "/" + NAME_DATABASE
         
-        self.dateFormatter = NSDateFormatter.init()
-        self.dateFormatter?.dateFromString("yyyy-MM-dd HH:mm:ss")
+        self.dateFormatter = DateFormatter.init()
         
-        dispatch_async(dbQueue) { [weak self] () -> Void in
+        dbQueue.async { [weak self] () -> Void in
             
             if let strongSelf = self {
                 strongSelf.fmDatabaseQueue = FMDatabaseQueue.init(path: databasePath)
@@ -43,20 +42,20 @@ class AftDBManager: NSObject {
 
     }
     
-    func createTableWithSQLs(sqls: NSArray) -> Void {
-        dispatch_async(dbQueue) { [weak self] () -> Void in
+    func createTableWithSQLs(_ sqls: NSArray) -> Void {
+        dbQueue.async { [weak self] () -> Void in
             if let strongSelf = self {
                 strongSelf.fmDatabaseQueue?.inDatabase({ (dataBase) -> Void in
                     for sql in sqls {
-                        dataBase.executeStatements(sql as! String)
+                        dataBase?.executeStatements(sql as! String)
                     }
                 })
             }
         }
     }
     
-    func addArticles(articles: [AftArticle]) -> Void {
-        dispatch_async(dbQueue) { [weak self] () -> Void in
+    func addArticles(_ articles: [AftArticle]) -> Void {
+        dbQueue.async { [weak self] () -> Void in
             if let strongSelf = self {
                 strongSelf.fmDatabaseQueue?.inDatabase({ (dataBase) -> Void in
                     
@@ -64,12 +63,12 @@ class AftDBManager: NSObject {
                     
                     for article in articles {
                         
-                        let createDateString = strongSelf.dateFormatter?.stringFromDate(article.createAt)
-                        let updateDateString = strongSelf.dateFormatter?.stringFromDate(article.updateAt)
+                        let createDateString = strongSelf.dateFormatter?.string(from: article.createAt as Date)
+                        let updateDateString = strongSelf.dateFormatter?.string(from: article.updateAt as Date)
                         let sqlParams: String = "('\(article.articleID)','\(article.title)','\(article.content)','\(article.author)','\(article.refer)','\(article.authorIntro)','\(createDateString)','\(updateDateString)');"
                         
                         
-                        let addArticlesResult:Bool = dataBase.executeUpdate(sqlHead + sqlParams, withArgumentsInArray: nil)
+                        let addArticlesResult:Bool = dataBase!.executeUpdate(sqlHead + sqlParams, withArgumentsIn: nil)
                         print("addArticlesResult: \(addArticlesResult)")
                         if addArticlesResult == false {
                             print("last error: \(dataBase?.lastErrorMessage())")
@@ -82,41 +81,41 @@ class AftDBManager: NSObject {
         }
     }
     
-    func loadArticles(completed :([AftArticle]) -> Void) -> Void {
+    func loadArticles(_ completed :@escaping ([AftArticle]) -> Void) -> Void {
         
-        dispatch_async(dbQueue) { [weak self] () -> Void in
+        dbQueue.async { [weak self] () -> Void in
             
             if let strongSelf = self {
                 strongSelf.fmDatabaseQueue?.inDatabase({ (dataBase) -> Void in
                     let querySQL: String = "select * from tbARTICLE"
-                    let articleSet = dataBase.executeQuery(querySQL, withArgumentsInArray: nil)
+                    let articleSet = dataBase?.executeQuery(querySQL, withArgumentsIn: nil)
                     
                     var modelArray = [AftArticle]()
                     
-                    while(articleSet.next()) {
+                    while(articleSet?.next())! {
                         let tempModel: AftArticle = AftArticle()
-                        tempModel.articleID = articleSet.objectForColumnName("objectId") as! String
-                        tempModel.title = articleSet.objectForColumnName("title") as! String
-                        tempModel.content = articleSet.objectForColumnName("content") as! String
-                        tempModel.author = articleSet.objectForColumnName("author") as! String
-                        tempModel.refer = articleSet.objectForColumnName("refer") as! String
-                        tempModel.authorIntro = articleSet.objectForColumnName("authorIntro") as! String
+                        tempModel.articleID = articleSet?.object(forColumnName: "objectId") as! String
+                        tempModel.title = articleSet?.object(forColumnName: "title") as! String
+                        tempModel.content = articleSet?.object(forColumnName: "content") as! String
+                        tempModel.author = articleSet?.object(forColumnName: "author") as! String
+                        tempModel.refer = articleSet?.object(forColumnName: "refer") as! String
+                        tempModel.authorIntro = articleSet?.object(forColumnName: "authorIntro") as! String
                         
-                        if let createAtMsg: String = articleSet.objectForColumnName("createAt") as? String  {
-                            let createDate: NSDate? = strongSelf.dateFormatter?.dateFromString(createAtMsg)
+                        if let createAtMsg: String = articleSet?.object(forColumnName: "createAt") as? String  {
+                            let createDate: Date? = strongSelf.dateFormatter?.date(from: createAtMsg)
                             tempModel.createAt = createDate
                         }
                         
-                        if let updateAtMsg: String = articleSet.objectForColumnName("updateAt") as? String {
+                        if let updateAtMsg: String = articleSet?.object(forColumnName: "updateAt") as? String {
                             
-                            let updateDate: NSDate? = strongSelf.dateFormatter?.dateFromString(updateAtMsg)
+                            let updateDate: Date? = strongSelf.dateFormatter?.date(from: updateAtMsg)
                             tempModel.updateAt = updateDate
                         }
                         
                         modelArray.append(tempModel)
                     }
                     
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    DispatchQueue.main.async(execute: { () -> Void in
                         completed(modelArray)
                     })
                 })

@@ -19,45 +19,44 @@ class AftBmobManager: NSObject {
     
     //MARK: Public 
     
-    func loadArticleLists(parseResultMethod: ([AftArticle]) -> Void ) -> Void {
+    func loadArticleLists(parseResultMethod: @escaping ([AftArticle]) -> Void ) -> Void {
         let bmobQuery: BmobQuery = BmobQuery(className: "table_article")
         
-        bmobQuery.findObjectsInBackgroundWithBlock { (results, error) -> Void in
-            
+        bmobQuery.findObjectsInBackground { (results, error) in
             var tempArticleLists: [AftArticle] = [AftArticle]()
-            
-            for bmobObject in results {
+            for bmobObject in results! {
                 
                 if bmobObject is BmobObject {
                     let tempArticle: AftArticle = AftArticle.init()
-                    tempArticle.articleID = bmobObject.objectId
-                    tempArticle.createAt = bmobObject.createdAt
-                    tempArticle.updateAt = bmobObject.updatedAt
-                    tempArticle.title = bmobObject.objectForKey("title") as! String
-                    tempArticle.content = bmobObject.objectForKey("content") as! String
-                    tempArticle.author = bmobObject.objectForKey("author") as? String
-                    tempArticle.authorIntro = bmobObject.objectForKey("authorIntro") as? String
-                    tempArticle.refer = bmobObject.objectForKey("refer") as? String
+                    tempArticle.articleID = (bmobObject as! BmobObject).objectId
+                    tempArticle.createAt = (bmobObject as! BmobObject).createdAt
+                    tempArticle.updateAt = (bmobObject as! BmobObject).updatedAt
+                    tempArticle.title = (bmobObject as! BmobObject).object(forKey: "title") as! String
+                    tempArticle.content =  (bmobObject as! BmobObject).object(forKey: "content") as! String
+                    tempArticle.author =  (bmobObject as! BmobObject).object(forKey: "author") as? String
+                    tempArticle.authorIntro =  (bmobObject as! BmobObject).object(forKey: "authorIntro") as? String
+                    tempArticle.refer =  (bmobObject as! BmobObject).object(forKey: "refer") as? String
                     tempArticleLists.append(tempArticle)
                 }
             }
             parseResultMethod(tempArticleLists)
         }
+        
     }
     
-    func deleteArticles(articleIDs: NSArray, completed: (NSError?,Bool) -> Void) -> Void {
+    func deleteArticles(articleIDs: NSArray, completed: @escaping (NSError?,Bool) -> Void) -> Void {
         let bmobQuery: BmobQuery = BmobQuery(className: "table_article")
         for articleID in articleIDs {
-            bmobQuery.getObjectInBackgroundWithId(articleID as! String, block: { (responseObject, queryError) -> Void in
+            bmobQuery.getObjectInBackground(withId: articleID as! String, block: { (responseObject, queryError) -> Void in
                 if let requestQueryError = queryError {
                     print("找不到要删除的数据：\(requestQueryError)")
-                    completed(queryError,false)
+                    completed(queryError as NSError?,false)
                 }else {
                     if let deletedObject: BmobObject = responseObject {
-                        deletedObject.deleteInBackgroundWithBlock({ (success, deletedError) -> Void in
+                        deletedObject.deleteInBackground({ (success, deletedError) -> Void in
                             if let requestDeletedError = deletedError {
                                 print("删除的数据异常：\(requestDeletedError)")
-                                completed(deletedError,false)
+                                completed(deletedError as NSError?,false)
                             }else {
                                 completed(nil,true)
                             }
@@ -68,7 +67,7 @@ class AftBmobManager: NSObject {
         }
     }
     
-    func postArticleWithInfo(info: NSDictionary, completed: (NSError?, Bool) -> Void) -> Void {
+    func postArticleWithInfo(info: NSDictionary, completed: @escaping (NSError?, Bool) -> Void) -> Void {
         
         let articleModel: BmobObject = BmobObject.init(className: "table_article")
         
@@ -78,8 +77,8 @@ class AftBmobManager: NSObject {
         articleModel.setObject(info["authorIntro"], forKey: "authorIntro")
         articleModel.setObject(info["refer"], forKey: "refer")
         
-        articleModel.saveInBackgroundWithResultBlock { (isSuccess, saveError) -> Void in
-            completed(saveError,isSuccess)
+        articleModel.saveInBackground { (result, Error) in
+            completed(Error as NSError?, result)
         }
     }
     

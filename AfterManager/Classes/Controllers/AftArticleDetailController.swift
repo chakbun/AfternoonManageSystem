@@ -17,7 +17,7 @@ class AftArticleDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let editButtonItem: UIBarButtonItem = UIBarButtonItem.init(title: "操作", style: UIBarButtonItemStyle.Plain, target: self, action: "editBarButtonAction:")
+        let editButtonItem: UIBarButtonItem = UIBarButtonItem.init(title: "操作", style: UIBarButtonItemStyle.plain, target: self, action: #selector(AftArticleDetailController.editBarButtonAction(_:)))
         self.navigationItem.rightBarButtonItem = editButtonItem
         
         if let tempArticle = article {
@@ -34,21 +34,21 @@ class AftArticleDetailController: UIViewController {
         print("--------------deinit\( NSStringFromClass(self.classForCoder))")
     }
     
-    func editBarButtonAction(sender: AnyObject) {
-        let editActionSheet: UIAlertController = UIAlertController.init(title: "选择操作", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        editActionSheet.addAction(UIAlertAction.init(title: "修改", style: UIAlertActionStyle.Destructive, handler: { (alertAction) -> Void in
+    func editBarButtonAction(_ sender: AnyObject) {
+        let editActionSheet: UIAlertController = UIAlertController.init(title: "选择操作", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+        editActionSheet.addAction(UIAlertAction.init(title: "修改", style: UIAlertActionStyle.destructive, handler: { (alertAction) -> Void in
             
         }))
         
-        editActionSheet.addAction(UIAlertAction.init(title: "删除", style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
+        editActionSheet.addAction(UIAlertAction.init(title: "删除", style: UIAlertActionStyle.default, handler: { (alertAction) -> Void in
             
         }))
         
-        editActionSheet.addAction(UIAlertAction.init(title: "取消", style: UIAlertActionStyle.Cancel, handler: { (alertAction) -> Void in
+        editActionSheet.addAction(UIAlertAction.init(title: "取消", style: UIAlertActionStyle.cancel, handler: { (alertAction) -> Void in
             
         }))
         
-        self .presentViewController(editActionSheet, animated: true, completion: nil)
+        self .present(editActionSheet, animated: true, completion: nil)
         
     }
     

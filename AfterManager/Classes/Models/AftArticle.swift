@@ -15,8 +15,8 @@ class AftArticle: NSObject {
     var refer : String!
     var author : String!
     var authorIntro : String!
-    var createAt : NSDate!
-    var updateAt : NSDate!
+    var createAt : Date!
+    var updateAt : Date!
     
     override init() {
         super.init()

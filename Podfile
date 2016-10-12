@@ -5,7 +5,7 @@
 
 target 'AfterManager' do
 
-   pod 'BmobSDK', '~> 1.6.1'
+   pod 'BmobSDK', '~> 1.7.2'
    pod 'ZSSRichTextEditor', '~> 0.5.2.1'
    pod 'Masonry', '~> 0.6.2'
    pod 'FMDB', '~> 2.5'

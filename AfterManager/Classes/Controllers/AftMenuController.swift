@@ -13,7 +13,7 @@ class AftMenuContrller: UITableViewController {
     
     var itemsTitle: NSArray?
     
-    func aftLocalizedString(key: String)->(String) {
+    func aftLocalizedString(_ key: String)->(String) {
         let value: String = NSLocalizedString(key, comment: "没有对应的键值")
         return value
     }
@@ -28,27 +28,27 @@ class AftMenuContrller: UITableViewController {
         super.didReceiveMemoryWarning()   
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemsTitle!.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let itemsReUserID: String = "menuReUserID"
-        var itemCell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(itemsReUserID)
+        var itemCell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: itemsReUserID)
         if itemCell == nil {
-            itemCell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: itemsReUserID)
+            itemCell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: itemsReUserID)
         }
-        itemCell.textLabel?.text = itemsTitle![indexPath.row] as? String
-        itemCell.selectionStyle = UITableViewCellSelectionStyle.None
+        itemCell.textLabel?.text = itemsTitle![(indexPath as NSIndexPath).row] as? String
+        itemCell.selectionStyle = UITableViewCellSelectionStyle.none
         return itemCell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let SEGUE_NAMES: NSArray = ["articleVcSegueID","imageVcSegueID"];
         
-        self.performSegueWithIdentifier(SEGUE_NAMES[indexPath.row] as! String, sender: self)
+        self.performSegue(withIdentifier: SEGUE_NAMES[(indexPath as NSIndexPath).row] as! String, sender: self)
     }
     
 }

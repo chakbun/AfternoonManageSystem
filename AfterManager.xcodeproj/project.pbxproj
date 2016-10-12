@@ -213,6 +213,7 @@
 					DFE189BA1BFAC2BB00C14339 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = SU8WEJ4S57;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -449,6 +450,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AfterManager/App/AfterManager-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -466,6 +468,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.after.AfterManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AfterManager/App/AfterManager-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
